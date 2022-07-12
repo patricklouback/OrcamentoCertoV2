@@ -7,6 +7,8 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 const schema = yup.object({
   nome: yup.string().required('Informe seu nome completo'),
   email: yup.string().required('Informe seu email'),
@@ -23,8 +25,19 @@ export default function Cadastro({navigation}) {
     navigation.navigate('home');
   }
 
-  function handleNewAccount(){
-
+  function handleNewAccount(data){
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, data.email, data.senha)
+    .then((userCredential) => {
+    // Signed in
+    const user = userCredential.user;
+    // ...
+    })
+    .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+    });
   }
 
  return (
@@ -110,7 +123,7 @@ export default function Cadastro({navigation}) {
     {errors.senha && <Text style = { styles.labelError }>{errors.senha?.message}</Text>}
   </KeyboardAvoidingView>
     
-    <TouchableOpacity style = { styles.salvarBtn } onPress = {handleNewAccount}>
+    <TouchableOpacity style = { styles.salvarBtn } onPress = {handleSubmit(handleNewAccount)}>
       <Text style = { styles.salvarText }>
         Salvar
       </Text>
