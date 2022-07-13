@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from '../../../firebase';
 import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 
@@ -36,6 +36,7 @@ export default function Cadastro({navigation}) {
       const user = userCredential.user;
       console.log(user)
       abreTelaHome();
+      sendEmailVerification(user);
     })
     .catch((error) => {
       const errorCode = error.code;
