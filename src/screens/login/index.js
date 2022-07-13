@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../../firebase';
 
 import styles from './styles';
 
@@ -14,14 +16,35 @@ const schema = yup.object({
 
 export default function Login({navigation}) {
 
-  const { control, handleSubmit, formState: { errors } } = useForm({
+  const { control, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema)
   })
 
+  useEffect(()=>{
+    reset();
+  },[])
+
+  const login = data => {
+    signInWithEmailAndPassword(auth, data.email, data.senha)
+    .then((userCredential) => {
+    // Signed in
+    const user = userCredential.user;
+    console.log(user);
+    abreTelaHome();
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    alert(errorMessage)
+    });
+  }
+
   function abreTelaCadastro(){
+    reset();
     navigation.navigate('cadastro');
   }
   function abreTelaHome(){
+    reset();
     navigation.navigate('home');
   }
 
@@ -91,7 +114,7 @@ export default function Login({navigation}) {
       </TouchableOpacity>
     </View>
 
-    <TouchableOpacity style = { styles.loginBtn } onPress = {handleSubmit(abreTelaHome)}>
+    <TouchableOpacity style = { styles.loginBtn } onPress = {handleSubmit(login)}>
       <Text style = { styles.loginText }>
         Entrar
       </Text>
