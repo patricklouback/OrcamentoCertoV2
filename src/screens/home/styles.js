@@ -6,14 +6,56 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
     },
-    logo: {
-        width: 400,
-        height: 400,
+    viewLogo: {
+        width: '100%',
+        alignItems:'flex-end',
     },
-    textHome: {
-        fontSize: 20,
-        color: '#BF996F',
-        fontWeight: 'bold',
+    logo: {
+        width: 300,
+        height: 200,
+    },
+    viewForm: {
+        width: '100%',
+
+    },
+    viewInput:{
+      flexDirection: 'row',
+      width: '100%',
+      height: 45,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: 10
+    },
+    textInput: {
+      width: 150,
+      height: 45,
+      borderWidth:1,
+      borderColor: '#BF996F',
+      borderRadius: 10,
+      padding: 10,
+      fontSize: 15,
+      color: '#BF996F',
+      marginLeft: 10
+    },
+    Btn: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#BF996F',
+      borderRadius: 15,
+      width: 350,
+      height: 55,
+      marginTop: 25
+    },
+    BtnText: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: '#FFF'
+    },
+    labelError: {
+      fontSize: 13,
+      color: '#BF996F',
+      width:'100%',
+      marginLeft: 140,
     },
   });
 
