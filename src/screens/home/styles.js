@@ -57,6 +57,44 @@ const styles = StyleSheet.create({
       width:'100%',
       marginLeft: 140,
     },
+    viewAlteraMargem: {
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      marginTop: 20,
+      marginRight: 70,
+    },
+    querAlterarText: {
+        color: '#BF996F'
+    },
+    cliqueAquiText: {
+        color: '#BF996F',
+        fontWeight: 'bold',
+    },
+    viewResultado: {
+      width: 350,
+      height: 100,
+      marginTop: 20,
+      borderRadius: 20,
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      backgroundColor: '#f9f3ed',
+      borderWidth:2,
+      borderColor: '#BF996F',
+      flexDirection: 'row',
+    },
+    textoValorFinal: {
+      fontSize: 20,
+      color: '#BF996F',
+      fontWeight: 'bold',
+      marginLeft: 35
+    },
+    textoResultado: {
+      fontSize: 20,
+      color: '#BF996F',
+      fontWeight: 'bold',
+      marginLeft: 5
+    }
   });
 
   export default styles;
