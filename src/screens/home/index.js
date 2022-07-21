@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
-
+import { Entypo  } from '@expo/vector-icons'
 import styles from './styles';
 
 import { useForm, Controller } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
 
 export default function Home() {
   const [margem, setMargem] = useState(2.4);
@@ -16,35 +14,19 @@ export default function Home() {
   })
 
   const calcularValorFinal = (data) => {
-  const i1 = parseFloat(data.item1)
-  const i2 = parseFloat(data.item2)
-  const i3 = parseFloat(data.item3)
-  const i4 = parseFloat(data.item4)
-  const i5 = parseFloat(data.item5)
-  const i6 = parseFloat(data.item6)
-  const i7 = parseFloat(data.item7)
-  const i8 = parseFloat(data.item8)
-  const i9 = parseFloat(data.item9)
-  const i10 = parseFloat(data.item10)
-  const i11 = parseFloat(data.item11)
-  const i12 = parseFloat(data.item12)
-  const i13 = parseFloat(data.item13)
-  const i14 = parseFloat(data.item14)
-
   const itensString = [data.item1, data.item2, data.item3, data.item4, data.item5, data.item6,
                         data.item7, data.item8, data.item9, data.item10, data.item11, data.item12,data.item13, data.item14];
-  
   var soma = 0
+
   for (let index = 0; index < itensString.length; index++) {
-    if (itensString[index] == '') {
+    if (itensString[index] == undefined) {
       soma += 0;
     } else {
       soma += parseFloat(itensString[index])
     }
   }
 
-  var result = (soma * margem).toFixed(2)
-  //var resultString = result
+  var result = (soma * margem).toFixed(2).replace('.',',')
 
   setresultado(result)
   }
@@ -54,6 +36,13 @@ export default function Home() {
    <View style = { styles.container }>
     
     <View style = { styles.viewLogo }>
+      <TouchableOpacity style = {styles.save}>
+        <Entypo
+          name= 'save'
+          size= {35}
+          color= '#BF996F'
+          />
+      </TouchableOpacity>
       <Image
         style = { styles.logo }
         source= { require('../../images/logo.png') }

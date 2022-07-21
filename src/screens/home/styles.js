@@ -8,7 +8,13 @@ const styles = StyleSheet.create({
     },
     viewLogo: {
         width: '100%',
-        alignItems:'flex-end',
+        justifyContent:'flex-end',
+        flexDirection:'row',
+    },
+    save: {
+      position: 'absolute',
+      top: 80,
+      left: 30,
     },
     logo: {
         width: 300,
@@ -16,7 +22,6 @@ const styles = StyleSheet.create({
     },
     viewForm: {
         width: '100%',
-
     },
     viewInput:{
       flexDirection: 'row',
@@ -76,7 +81,7 @@ const styles = StyleSheet.create({
       height: 100,
       marginTop: 20,
       borderRadius: 20,
-      justifyContent: 'flex-start',
+      justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#f9f3ed',
       borderWidth:2,
@@ -87,7 +92,6 @@ const styles = StyleSheet.create({
       fontSize: 20,
       color: '#BF996F',
       fontWeight: 'bold',
-      marginLeft: 35
     },
     textoResultado: {
       fontSize: 20,
