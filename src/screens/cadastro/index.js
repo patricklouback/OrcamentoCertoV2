@@ -25,17 +25,16 @@ export default function Cadastro({navigation}) {
     reset();
   },[])
 
-  function abreTelaHome(){
+  function abreTelalogin(){
     reset();
-    navigation.navigate('home');
+    navigation.navigate('login');
   }
 
   const handleNewAccount = data => {
     createUserWithEmailAndPassword(auth, data.email, data.senha)
     .then((userCredential) => {
       const user = userCredential.user;
-      console.log(user)
-      abreTelaHome();
+      abreTelalogin();
       sendEmailVerification(user);
     })
     .catch((error) => {

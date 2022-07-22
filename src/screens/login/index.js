@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../../firebase';
@@ -16,6 +16,9 @@ const schema = yup.object({
 
 export default function Login({navigation}) {
 
+  const [uid, setUid] = useState('');
+  const [logado, setLogado] = useState(false);
+
   const { control, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema)
   })
@@ -24,13 +27,25 @@ export default function Login({navigation}) {
     reset();
   },[])
 
+  useEffect(()=>{
+    reset();
+    if (uid == '') {
+      return
+    } else if (logado == false) {
+      alert('Verifique seu E-mail!')
+    } else {
+      abreTelaHome();
+    }
+  },[uid, logado])
+
   const login = data => {
-    signInWithEmailAndPassword(auth, data.email, data.senha)
+    signInWithEmailAndPassword(auth, data.email.trim(), data.senha)
     .then((userCredential) => {
     // Signed in
-    const user = userCredential.user;
-    console.log(user);
-    abreTelaHome();
+    const uid = userCredential.user.uid;
+    const emailVerificado = userCredential.user.emailVerified;
+    setUid(uid);
+    setLogado(emailVerificado);
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -45,7 +60,7 @@ export default function Login({navigation}) {
   }
   function abreTelaHome(){
     reset();
-    navigation.navigate('home');
+    navigation.navigate('home', {uid: uid});
   }
 
 

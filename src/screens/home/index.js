@@ -1,14 +1,22 @@
-import React, {useState} from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity } from 'react-native';
-import { Entypo  } from '@expo/vector-icons'
+import React, {useState, useEffect} from 'react';
+import { View, Text, Image, TextInput, TouchableOpacity, Modal, Pressable } from 'react-native';
+import { useRoute } from '@react-navigation/native';
+import { Entypo  } from '@expo/vector-icons';
+import { getFirestore, setDoc, doc, addDoc } from 'firebase/firestore';
 import styles from './styles';
 
 import { useForm, Controller } from 'react-hook-form'
 
 export default function Home() {
-  const [margem, setMargem] = useState(2.4);
-  const [resultado, setresultado] = useState('');
+  const route = useRoute();
+  const {uid} = route.params;
 
+  const [margem, setMargem] = useState(2.4);
+  const [valorFinal, setValorFinal] = useState('');
+  const [custo, setCusto] = useState('');
+  const [nome, setNome] = useState('');
+  const [descricao, setDescricao] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
   const { control, handleSubmit, formState: { errors }, reset } = useForm({
   })
@@ -17,26 +25,56 @@ export default function Home() {
   const itensString = [data.item1, data.item2, data.item3, data.item4, data.item5, data.item6,
                         data.item7, data.item8, data.item9, data.item10, data.item11, data.item12,data.item13, data.item14];
   var soma = 0
-
   for (let index = 0; index < itensString.length; index++) {
-    if (itensString[index] == undefined) {
+    if (itensString[index] == undefined || itensString[index] == '') {
       soma += 0;
     } else {
       soma += parseFloat(itensString[index])
     }
   }
-
   var result = (soma * margem).toFixed(2).replace('.',',')
-
-  setresultado(result)
+  setCusto(soma.toFixed(2).replace('.',','))
+  setValorFinal(result)
   }
 
+  const saveProduct = async() => {
+      
+      const firestore = getFirestore();
+      var UID = uid.trim();
+      var name = nome.trim();
+
+      const docData = {
+          nome: nome,
+          descricao: descricao,
+          custo: custo,
+          valorFinal: valorFinal,
+          margem: margem,
+          uid: uid
+      };
+
+      await setDoc(doc(firestore, UID, name), docData);
+
+    }
+
+  const saveNomeDescricao = data => {
+    setNome(data.nomeDoProduto);
+    setDescricao(data.descricaoDoProduto);
+    setModalVisible(!modalVisible);
+  }
+  
+  useEffect(()=>{
+    if (nome == '' || descricao == '') {
+      return
+    } else {
+      saveProduct();
+    }
+  },[nome, descricao])
 
  return (
    <View style = { styles.container }>
     
     <View style = { styles.viewLogo }>
-      <TouchableOpacity style = {styles.save}>
+      <TouchableOpacity style = {styles.save} onPress = {()=>{setModalVisible(true)}}>
         <Entypo
           name= 'save'
           size= {35}
@@ -298,6 +336,58 @@ export default function Home() {
 
     </View>
 
+
+    <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Nome do Produto: </Text>
+            <Controller
+              control={control}
+              name='nomeDoProduto'
+              render={( {field: { onChange, onBlur, value }} ) => (
+                <TextInput 
+                    style = { styles.textInputNomeModal }
+                    placeholder = 'Nome do Produto'
+                    underlineColorAndroid = 'transparent'
+                    onChangeText = {onChange}
+                    onBlur = {onBlur}
+                    value = {value}
+                />
+              )}
+            />
+            <Text style={styles.modalText}>Descrição do Produto: </Text>
+            <Controller
+              control={control}
+              name='descricaoDoProduto'
+              render={( {field: { onChange, onBlur, value }} ) => (
+                <TextInput 
+                    style = { styles.textInputDescricaoModal }
+                    placeholder = 'Descrição do Produto'
+                    underlineColorAndroid = 'transparent'
+                    onChangeText = {onChange}
+                    onBlur = {onBlur}
+                    value = {value}
+                    multiline = {true}
+                />
+              )}
+            />
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={handleSubmit(saveNomeDescricao)}>
+              <Text style={styles.textStyle}>Salvar</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
+
+
     <TouchableOpacity style = { styles.Btn } onPress = {handleSubmit(calcularValorFinal)}>
       <Text style = { styles.BtnText }>
         Calcular
@@ -318,7 +408,7 @@ export default function Home() {
         O valor final é: R$ 
       </Text>
       <Text style = { styles.textoResultado }>
-        {resultado}
+        {valorFinal}
       </Text>
     </View>
 
