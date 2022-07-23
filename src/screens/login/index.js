@@ -18,6 +18,7 @@ export default function Login({navigation}) {
 
   const [uid, setUid] = useState('');
   const [logado, setLogado] = useState(false);
+  const [verificado, setVerificado] = useState(false);
 
   const { control, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema)
@@ -25,30 +26,45 @@ export default function Login({navigation}) {
 
   useEffect(()=>{
     reset();
+    
+  const getUid = async () => {
+    try {
+      const value = await AsyncStorage.getItem('uid')
+      if(value !== null) {
+      setUid(value);
+      setVerificado(true);
+      }
+    } catch(e) {
+      alert(e);
+    }
+
+    getUid();
+}
+
   },[])
 
   useEffect(()=>{
-    reset();
     if (uid == '') {
       return
-    } else if (logado == false) {
-      alert('Verifique seu E-mail!')
+    } else if (verificado == false) {
+      alert('Verifique seu E-mail!');
     } else {
       abreTelaHome();
     }
-  },[uid, logado])
+  },[verificado])
+
 
   const login = data => {
+
     signInWithEmailAndPassword(auth, data.email.trim(), data.senha)
     .then((userCredential) => {
     // Signed in
     const uid = userCredential.user.uid;
     const emailVerificado = userCredential.user.emailVerified;
-    setUid(uid);
-    setLogado(emailVerificado);
+      setUid(uid);
+      setVerificado(emailVerificado);
   })
   .catch((error) => {
-    const errorCode = error.code;
     const errorMessage = error.message;
     alert(errorMessage)
     });

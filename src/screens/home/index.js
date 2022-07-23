@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, Modal, Pressable } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+
 import { Entypo  } from '@expo/vector-icons';
-import { getFirestore, setDoc, doc, addDoc } from 'firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getFirestore, setDoc, doc,} from 'firebase/firestore';
 import styles from './styles';
 
 import { useForm, Controller } from 'react-hook-form'
@@ -17,6 +19,7 @@ export default function Home() {
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const [modal2Visible, setModal2Visible] = useState(false);
 
   const { control, handleSubmit, formState: { errors }, reset } = useForm({
   })
@@ -54,6 +57,8 @@ export default function Home() {
 
       await setDoc(doc(firestore, UID, name), docData);
 
+      reset();
+
     }
 
   const saveNomeDescricao = data => {
@@ -61,6 +66,24 @@ export default function Home() {
     setDescricao(data.descricaoDoProduto);
     setModalVisible(!modalVisible);
   }
+
+  const saveMargem = data => {
+    var mrg = data.margemnova == '' || data.margemnova == undefined ? 2.4 : parseFloat(data.margemnova);
+    setMargem(mrg);
+    setModal2Visible(!modal2Visible);
+  }
+
+  useEffect(()=>{
+    const storeUid = async () => {
+      try {
+        await AsyncStorage.setItem('uid', uid)
+      } catch (e) {
+        alert('Nenhum dado chegou.')
+      }
+    }
+
+    storeUid();
+  },[])
   
   useEffect(()=>{
     if (nome == '' || descricao == '') {
@@ -386,6 +409,41 @@ export default function Home() {
         </View>
       </Modal>
 
+    <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modal2Visible}
+        onRequestClose={() => {
+          setModal2Visible(!modal2Visible);
+        }}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalMargemView}>
+            <Text style={styles.modalText}>Nova Margem (Padrão 2.4x): </Text>
+            <Controller
+              control={control}
+              name='margemnova'
+              render={( {field: { onChange, onBlur, value }} ) => (
+                <TextInput 
+                    style = { styles.textInputMargemModal }
+                    placeholder = 'Nova Margem do Produto'
+                    underlineColorAndroid = 'transparent'
+                    onChangeText = {onChange}
+                    onBlur = {onBlur}
+                    value = {value}
+                    keyboardType = 'numeric'
+                />
+              )}
+            />
+            
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={handleSubmit(saveMargem)}>
+              <Text style={styles.textStyle}>Salvar</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
 
 
     <TouchableOpacity style = { styles.Btn } onPress = {handleSubmit(calcularValorFinal)}>
@@ -396,7 +454,7 @@ export default function Home() {
 
     <View style = {  styles.viewAlteraMargem }>
       <Text style = { styles.querAlterarText }>Quer alterar a Margem de Lucro? </Text>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=>{setModal2Visible(true)}}>
       <Text style = { styles.cliqueAquiText }>
         Clique aqui
       </Text>
