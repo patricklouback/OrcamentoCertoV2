@@ -11,9 +11,18 @@ const styles = StyleSheet.create({
         justifyContent:'flex-end',
         flexDirection:'row',
     },
+    viewIcons:{
+      width: 100,
+      height: 200,
+    },
     save: {
       position: 'absolute',
       top: 80,
+      left: 30,
+    },
+    produtos: {
+      position: 'absolute',
+      top: 120,
       left: 30,
     },
     logo: {

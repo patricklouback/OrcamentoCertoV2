@@ -87,7 +87,7 @@ export default function Login({navigation}) {
   }
   function abreTelaHome(){
     reset();
-    navigation.navigate('home', {uid: uid});
+    navigation.navigate('rotaApp', {uid: uid});
   }
 
 

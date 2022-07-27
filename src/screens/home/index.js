@@ -2,14 +2,15 @@ import React, {useState, useEffect} from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, Modal, Pressable } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
-import { Entypo  } from '@expo/vector-icons';
+import { Entypo, AntDesign } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getFirestore, setDoc, doc,} from 'firebase/firestore';
 import styles from './styles';
 
 import { useForm, Controller } from 'react-hook-form'
 
-export default function Home() {
+export default function Home({navigation}) {
+
   const route = useRoute();
   const {uid} = route.params;
 
@@ -93,17 +94,32 @@ export default function Home() {
     }
   },[nome, descricao])
 
+  function abreTelaProdutos () {
+    reset();
+    navigation.navigate('produtos', {uid: uid})
+  }
+
  return (
    <View style = { styles.container }>
     
     <View style = { styles.viewLogo }>
-      <TouchableOpacity style = {styles.save} onPress = {()=>{setModalVisible(true)}}>
-        <Entypo
-          name= 'save'
-          size= {35}
-          color= '#BF996F'
-          />
-      </TouchableOpacity>
+      <View style = { styles.viewIcons }>
+          <TouchableOpacity style = {styles.save} onPress = {()=>{setModalVisible(true)}}>
+            <Entypo
+              name= 'save'
+              size= {35}
+              color= '#BF996F'
+              />
+          </TouchableOpacity>
+          <TouchableOpacity style = {styles.produtos} onPress = {abreTelaProdutos}>
+            <AntDesign
+              name= 'bars'
+              size= {35}
+              color= '#BF996F'
+              />
+          </TouchableOpacity>
+      </View>
+
       <Image
         style = { styles.logo }
         source= { require('../../images/logo.png') }

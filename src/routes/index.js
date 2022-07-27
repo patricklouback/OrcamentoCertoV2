@@ -1,11 +1,11 @@
 import { NavigationContainer } from "@react-navigation/native";
 
-import { RotaCadastro } from './rotaCadastro'
+import { RouteNavigation } from "./_routeNavigation";
 
 export function Routes(){
     return (
         <NavigationContainer>
-            <RotaCadastro/>
+            <RouteNavigation/>
         </NavigationContainer>
     )
 }

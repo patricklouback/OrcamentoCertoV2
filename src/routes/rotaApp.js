@@ -1,23 +1,27 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useRoute } from '@react-navigation/native';
 
 const { Screen, Navigator } = createNativeStackNavigator();
 
-import Cadastro from '../screens/cadastro';
 import Home from "../screens/home";
-import Login from "../screens/login";
+import Produtos from "../screens/produtos";
 
-export function RotaCadastro(){
+export function RotaApp(){
+    const route = useRoute();
+    const {uid} = route.params;
+
     return (
         <Navigator screenOptions={{
             headerShown: false,
         }}>
             <Screen
-                name = 'login'
-                component={Login}
+                name = 'home'
+                component={Home}
+                initialParams={{uid: uid}}
             />
             <Screen
-                name = 'cadastro'
-                component={Cadastro}
+                name = 'produtos'
+                component={Produtos}
             />
 
         </Navigator>
