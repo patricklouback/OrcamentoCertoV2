@@ -52,13 +52,17 @@ const styles = StyleSheet.create({
       color: "#aa8761",
     },
     descriptionFlat: {
-      fontSize: 16,
+      fontSize: 15,
       color: "#aa8761",
+      width: 230,
     },
     viewRow: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'flex-start',
+      width: 350,
+      marginBottom: 2
+      
     },
   });
 //style = { styles.scrowView }

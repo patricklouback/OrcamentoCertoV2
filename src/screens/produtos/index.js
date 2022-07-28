@@ -1,66 +1,44 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, Image, FlatList, TouchableOpacity, Modal, Pressable } from 'react-native';
+import { View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
 import { AntDesign  } from '@expo/vector-icons';
-import { getFirestore, getDoc , doc,} from 'firebase/firestore';
+import { getFirestore, getDocs, collection,} from 'firebase/firestore';
 import styles from './styles';
-import {SeparatorItem} from '../../components/SeparatorItem';
 
-export default function Produtos() {
+export default function Produtos({navigation}) {
     const route = useRoute();
     const {uid} = route.params;
 
-    const produtosList = [
-        {
-          id: '1',
-          name: "Produto 1",
-          valor: '5.90',
-          custo: '2.90',
-          description:
-            "Teste descrição",
-        },
-        {
-            id: '2',
-            name: "Produto 2",
-            valor: '10.50',
-            custo: '2.90',
-            description:
-            "Teste descrição 2",
-        },
-        {
-            id: '3',
-            name: "Produto 1",
-            valor: '5.90',
-            custo: '2.90',
-            description:
-              "Teste descrição",
-          },
-          {
-              id: '4',
-              name: "Produto 2",
-              valor: '10.50',
-              custo: '2.90',
-              description:
-              "Teste descrição 2",
-          },
-          {
-            id: '5',
-            name: "Produto 1",
-            valor: '5.90',
-            custo: '2.90',
-            description:
-              "Teste descrição",
-          },
-          {
-              id: '6',
-              name: "Produto 2",
-              valor: '10.50',
-              custo: '2.90',
-              description:
-              "Teste descrição 2",
-          }
-    ];
+    const [produtos, setProdutos] = useState([])
+
+    useEffect(()=>{
+        LerProduct();
+    },[])
+
+    const LerProduct = async() => {
+      
+        const firestore = getFirestore();
+        var UID = uid;
+        const querySnapshot = await getDocs(collection(firestore, UID));
+        
+        var prod = [];
+        querySnapshot.forEach((doc) => {
+
+            const product = {
+                id: doc.id,
+                nome: doc.data().nome,
+                valorFinal: doc.data().valorFinal,
+                custo: doc.data().custo,
+                descricao: doc.data().descricao,
+                uid: doc.data().uid,
+            };
+            prod.unshift(product);
+        });
+            
+        setProdutos(prod);
+    }
+
 
     function abreTelaHome () {
         navigation.navigate('home', {uid: uid})
@@ -97,18 +75,18 @@ export default function Produtos() {
                         );
                       }}
                     showsHorizontalScrollIndicator={false}
-                    data={produtosList}
+                    data={produtos}
                     keyExtractor={(item) => item.id}
                     renderItem={({item}) => 
                         <View style={styles.containerFlat}>
                             <View style={styles.contentFlat}>
                                 <View style = {styles.viewRow}>
                                     <Text style={styles.titleFlat}>Nome do Produto: </Text>
-                                    <Text style={styles.descriptionFlat}>{item.name}</Text>
+                                    <Text style={styles.descriptionFlat}>{item.nome}</Text>
                                 </View>
                                 <View style = {styles.viewRow}>
                                     <Text style={styles.titleFlat}>Valor: </Text>
-                                    <Text style={styles.descriptionFlat}>R$ {item.valor}</Text>
+                                    <Text style={styles.descriptionFlat}>R$ {item.valorFinal}</Text>
                                 </View>
                                 <View style = {styles.viewRow}>
                                     <Text style={styles.titleFlat}>Custo: </Text>
@@ -116,7 +94,7 @@ export default function Produtos() {
                                 </View>
                                 <View style = {styles.viewRow}>
                                     <Text numberOfLines={5} style={styles.titleFlat}>Descrição: </Text>
-                                    <Text numberOfLines={5} style={styles.descriptionFlat}>{item.description}</Text>
+                                    <Text numberOfLines={5} style={styles.descriptionFlat}>{item.descricao}</Text>
                                 </View>
                             </View>
                         </View>
