@@ -29,26 +29,36 @@ const styles = StyleSheet.create({
       height: 50,
     },
     containerFlat: {
-      width: '100%',
-      backgroundColor: "#0202",
+      width: 350,
+      borderRadius:20,
+      backgroundColor: "#fcfaf9",
       alignItems: "center",
       justifyContent: "space-between",
       paddingHorizontal: 16,
       paddingVertical: 20,
     },
     contentFlat: {
-      flex: 1,
+      width:'100%',
       marginLeft: 16,
     },
     titleFlat: {
-      fontSize: 20,
+      fontSize: 18,
       fontWeight: "bold",
-      color: "#6F4E37",
-      marginBottom: 16,
+      color: "#aa8761",
+    },
+    titleHead: {
+      fontSize: 22,
+      fontWeight: "bold",
+      color: "#aa8761",
     },
     descriptionFlat: {
       fontSize: 16,
-      color: "#000",
+      color: "#aa8761",
+    },
+    viewRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
     },
   });
 //style = { styles.scrowView }
