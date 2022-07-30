@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, Modal, Pressable } from 'react-native';
-import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import { View, Text, Image, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../../firebase';
 
 import styles from './styles';
@@ -18,30 +18,11 @@ export default function Login({navigation}) {
 
   const [uid, setUid] = useState('');
   const [verificado, setVerificado] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [loadingVisible, setLoadingVisible] = useState(false);
 
   const { control, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema)
   })
-
-/*   useEffect(()=>{
-    reset();
-    
-  const getUid = async () => {
-    try {
-      const value = await AsyncStorage.getItem('uid')
-      if(value !== null) {
-      setUid(value);
-      setVerificado(true);
-      }
-    } catch(e) {
-      alert(e);
-    }
-
-    getUid();
-}
-
-  },[]) */
 
   useEffect(()=>{
     if (uid == '') {
@@ -49,12 +30,13 @@ export default function Login({navigation}) {
     } else if (verificado == false) {
       alert('Verifique seu E-mail!');
     } else {
+      setLoadingVisible(false);
       abreTelaHome();
     }
   },[verificado])
 
   const login = data => {
-
+    setLoadingVisible(true);
     signInWithEmailAndPassword(auth, data.email.trim(), data.senha)
     .then((userCredential) => {
     // Signed in
@@ -69,23 +51,20 @@ export default function Login({navigation}) {
     });
   }
 
-  const esqueceuSenha = data => {
-    sendPasswordResetEmail(auth, data.emailresetsenha)
-      .then(() => {
-        setModalVisible(false);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        
-      });
+  function abreTelaRedefinirSenha(){
+    setLoadingVisible(false);
+    reset();
+    navigation.navigate('redefinirSenha');
   }
-
+  
   function abreTelaCadastro(){
+    setLoadingVisible(false);
     reset();
     navigation.navigate('cadastro');
   }
+
   function abreTelaHome(){
+    setLoadingVisible(false);
     reset();
     navigation.navigate('rotaApp', {uid: uid});
   }
@@ -149,7 +128,7 @@ export default function Login({navigation}) {
     {errors.senha && <Text style = { styles.labelError }>{errors.senha?.message}</Text>}
     
     <View style = { styles.viewEsqueci }>
-      <TouchableOpacity style = { styles.esqueciSenhaBtn } onPress = {esqueceuSenha}>
+      <TouchableOpacity style = { styles.esqueciSenhaBtn } onPress = {abreTelaRedefinirSenha}>
         <Text style = { styles.esqueciSenhaText }>
           esqueceu a senha?
         </Text>
@@ -171,41 +150,13 @@ export default function Login({navigation}) {
     </TouchableOpacity>
     </View>
 
-    <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalMargemView}>
-            <Text style={styles.modalText}>Digite seu email: </Text>
-            <Controller
-              control={control}
-              name='emailresetsenha'
-              render={( {field: { onChange, onBlur, value }} ) => (
-                <TextInput 
-                    style = { styles.textInputMargemModal }
-                    placeholder = 'Digite seu Email'
-                    underlineColorAndroid = 'transparent'
-                    onChangeText = {onChange}
-                    onBlur = {onBlur}
-                    value = {value}
-                    keyboardType = 'email-address'
-                />
-              )}
-            />
-            
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={handleSubmit(esqueceuSenha)}>
-              <Text style={styles.textStyle}>Resetar Senha</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-
+    <View style = { styles.loading }>
+      <ActivityIndicator 
+          size= "large" 
+          color= "#BF996F"
+          animating= {loadingVisible} 
+      />
+    </View>
 
    </View>
   );

@@ -3,8 +3,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const { Screen, Navigator } = createNativeStackNavigator();
 
 import Cadastro from '../screens/cadastro';
-import Home from "../screens/home";
 import Login from "../screens/login";
+import RedefinirSenha from "../screens/redefinirSenha";
 
 export function RotaCadastro(){
     return (
@@ -18,6 +18,10 @@ export function RotaCadastro(){
             <Screen
                 name = 'cadastro'
                 component={Cadastro}
+            />
+            <Screen
+                name = 'redefinirSenha'
+                component={RedefinirSenha}
             />
 
         </Navigator>

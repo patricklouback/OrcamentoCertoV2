@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, Modal, Pressable } from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, Modal, Pressable, Alert } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
 import { Entypo, AntDesign } from '@expo/vector-icons';
@@ -41,7 +41,7 @@ export default function Home({navigation}) {
   setValorFinal(result)
   }
 
-  const saveProduct = async() => {
+  const saveProduct = () => {
       
       const firestore = getFirestore();
       var UID = uid.trim();
@@ -56,7 +56,8 @@ export default function Home({navigation}) {
           uid: uid
       };
 
-      await setDoc(doc(firestore, UID, name), docData);
+      setDoc(doc(firestore, UID, name), docData)
+      .then(Alert.alert('Sucesso!', 'Produto salvo com sucesso!'));
 
       reset();
 

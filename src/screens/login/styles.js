@@ -88,10 +88,10 @@ const styles = StyleSheet.create({
         marginTop: 22,
       },
       modalView: {
-        width: 350,
-        height: 270,
+        width: 300,
+        height: 220,
         margin: 20,
-        backgroundColor: 'white',
+        backgroundColor: '#FFF',
         borderRadius: 20,
         padding: 35,
         shadowColor: '#000',
@@ -104,10 +104,10 @@ const styles = StyleSheet.create({
         elevation: 5,
       },
       button: {
-        width: 100,
+        width: 150,
         borderRadius: 10,
         padding: 10,
-        marginTop: 10,
+        marginTop: 40,
         elevation: 3
       },
       buttonClose: {
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
       },
       modalMargemView: {
         width: 250,
-        height: 170,
+        height: 180,
         margin: 20,
         backgroundColor: 'white',
         borderRadius: 20,
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         elevation: 5,
       },
       textInputMargemModal: {
-        width: 180,
+        width: 240,
         height: 40,
         borderWidth:1,
         borderColor: '#BF996F',
@@ -149,9 +149,13 @@ const styles = StyleSheet.create({
         padding: 10,
         fontSize: 15,
         color: '#BF996F',
-        marginTop: 5,
+        marginTop: 15,
       },
-
+      loading: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
 
   });
 
