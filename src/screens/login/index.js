@@ -1,5 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { 
+  View, 
+  Text, 
+  Image, 
+  TextInput, 
+  TouchableOpacity, 
+  ActivityIndicator,
+  Keyboard, 
+  TouchableWithoutFeedback } from 'react-native';
+
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../../firebase';
 
@@ -47,6 +56,7 @@ export default function Login({navigation}) {
   })
   .catch((error) => {
     const errorMessage = error.message;
+    setLoadingVisible(false);
     alert(errorMessage)
     });
   }
@@ -71,6 +81,8 @@ export default function Login({navigation}) {
 
 
  return (
+  <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+  
    <View style = { styles.container }>
     
     <Image
@@ -141,6 +153,14 @@ export default function Login({navigation}) {
       </Text>
     </TouchableOpacity>
 
+    <View style = { styles.loading }>
+      <ActivityIndicator 
+          size= "large" 
+          color= "#BF996F"
+          animating= {loadingVisible} 
+      />
+    </View>
+
     <View style = {  styles.viewCadastreSe }>
       <Text style = { styles.naoTemContaText }>Ainda não tem uma conta? </Text>
       <TouchableOpacity style = { styles.cadastreSeBtn } onPress = {abreTelaCadastro}>
@@ -150,14 +170,10 @@ export default function Login({navigation}) {
     </TouchableOpacity>
     </View>
 
-    <View style = { styles.loading }>
-      <ActivityIndicator 
-          size= "large" 
-          color= "#BF996F"
-          animating= {loadingVisible} 
-      />
-    </View>
+
 
    </View>
+     
+  </TouchableWithoutFeedback>
   );
 }

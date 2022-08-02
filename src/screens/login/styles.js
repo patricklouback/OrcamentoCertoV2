@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     },
     viewCadastreSe: {
         flexDirection: 'row',
-        marginTop: 20
+        marginTop: 10,
     },
     naoTemContaText: {
         color: '#BF996F'
@@ -152,9 +152,10 @@ const styles = StyleSheet.create({
         marginTop: 15,
       },
       loading: {
-        flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginBottom: '5%',
+        marginTop: '5%',
       }
 
   });
