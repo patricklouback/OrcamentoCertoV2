@@ -17,22 +17,23 @@ const styles = StyleSheet.create({
     },
     back: {
       position: 'absolute',
-      top: 80,
+      top: 100,
       left: 30,
     },
     logo: {
         width: 300,
         height: 200,
+        marginTop: 20,
     },
     viewInput:{
       width: '100%',
       height: 45,
       alignItems: 'center',
       justifyContent: 'center',
-      marginTop: 10,
+      marginTop: 5,
     },
     textInput: {
-      width: 300,
+      width: 350,
       height: 45,
       borderWidth:1,
       borderColor: '#BF996F',
@@ -47,9 +48,9 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       backgroundColor: '#BF996F',
       borderRadius: 15,
-      width: 315,
+      width: 350,
       height: 55,
-      marginTop: 150,
+      marginTop: 240,
       marginLeft: 10
     },
     BtnText: {
@@ -101,11 +102,10 @@ const styles = StyleSheet.create({
       marginBottom: 30
     },
     title: {
-      marginLeft: 2,
-      fontSize: 35,
+      marginLeft: 0,
+      fontSize: 25,
       color: '#BF996F',
       fontWeight: 'bold',
-      marginBottom: 5
     },
     textInputNomeModal: {
       width: 300,
