@@ -23,7 +23,6 @@ export function RotaCadastro(){
                 name = 'redefinirSenha'
                 component={RedefinirSenha}
             />
-
         </Navigator>
     )
 }

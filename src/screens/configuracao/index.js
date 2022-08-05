@@ -3,10 +3,12 @@ import {
     View,
     Text,
     Image,
-    FlatList,
+    TextInput,
     TouchableOpacity,
     Keyboard,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    Modal,
+    Pressable
 } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
@@ -19,6 +21,8 @@ export default function Configuracao({ navigation }) {
     const route = useRoute();
     const { uid } = route.params;
 
+    const [modalVisible, setModalVisible] = useState(false);
+
     const [nome, setNome] = useState(null)
     const [email, setEmail] = useState(null)
     const [avatar, setAvatar] = useState(null)
@@ -28,6 +32,7 @@ export default function Configuracao({ navigation }) {
     }, [])
 
     const SalvarUser = async () => {
+        setModalVisible(!modalVisible);
         const auth = getAuth();
 
         updateProfile(auth.currentUser, {
@@ -55,14 +60,16 @@ export default function Configuracao({ navigation }) {
 
     }
 
-
+    function abreCamera(){
+        navigation.navigate('camera')
+    }
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 
             <View style={styles.container}>
                 <View style={styles.viewLogo}>
-                    <TouchableOpacity style={styles.reload} onPress={LerUser}>
+                    <TouchableOpacity style={styles.reload} onPress={()=>{setModalVisible(!modalVisible)}}>
                         <AntDesign
                             name='edit'
                             size={35}
@@ -89,7 +96,41 @@ export default function Configuracao({ navigation }) {
                     <Text style={styles.textUser2}>{email}</Text>
                 </View>
 
-                <View style={styles.viewInferior}></View>
+                <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Digite seu Nome: </Text>
+                  <TextInput
+                    style={styles.textInputNomeModal}
+                    placeholder='digite seu nome...'
+                    underlineColorAndroid='transparent'
+                    onChangeText={(props)=>{setNome(props)}}
+                    value={nome}
+              />
+              
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={SalvarUser}>
+                <Text style={styles.textStyle}>Salvar</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+
+                <TouchableOpacity style={styles.btnTirarFoto} onPress={abreCamera}>
+                    <Text style={styles.btnText}>Tirar Foto</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.btnSelecionarFoto}>
+                    <Text style={styles.btnText}>Selecionar Foto</Text>
+                </TouchableOpacity>
+
             </View>
 
         </TouchableWithoutFeedback>
