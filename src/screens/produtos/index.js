@@ -19,10 +19,17 @@ export default function Produtos({ navigation }) {
     const { uid } = route.params;
 
     const [produtos, setProdutos] = useState([])
+    const [atualize, setAtualize] = useState(false)
 
     useEffect(() => {
         LerProduct();
     }, [])
+
+    useEffect(()=>{
+        if (atualize) {
+            LerProduct();
+        }
+    },[atualize])
 
     const LerProduct = async () => {
 
@@ -45,11 +52,7 @@ export default function Produtos({ navigation }) {
         });
 
         setProdutos(prod);
-    }
-
-
-    function abreTelaHome() {
-        navigation.navigate('home', { uid: uid })
+        setAtualize(false);
     }
 
     return (
@@ -57,9 +60,9 @@ export default function Produtos({ navigation }) {
 
             <View style={styles.container}>
                 <View style={styles.viewLogo}>
-                    <TouchableOpacity style={styles.back} onPress={abreTelaHome}>
+                    <TouchableOpacity style={styles.reload} onPress={()=>{setAtualize(true)}}>
                         <AntDesign
-                            name='leftcircleo'
+                            name='reload1'
                             size={35}
                             color='#BF996F'
                         />

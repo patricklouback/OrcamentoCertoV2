@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     },
     viewForm: {
         width: '100%',
+        marginTop: -35
     },
     viewInput:{
       flexDirection: 'row',

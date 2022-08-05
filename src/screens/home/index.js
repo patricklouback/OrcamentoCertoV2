@@ -116,7 +116,6 @@ export default function Home({ navigation }) {
       <View style={styles.container}>
 
         <View style={styles.viewLogo}>
-          <View style={styles.viewIcons}>
             <TouchableOpacity style={styles.save} onPress={() => { setModalVisible(true) }}>
               <Entypo
                 name='save'
@@ -124,14 +123,6 @@ export default function Home({ navigation }) {
                 color='#BF996F'
               />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.produtos} onPress={abreTelaProdutos}>
-              <AntDesign
-                name='bars'
-                size={35}
-                color='#BF996F'
-              />
-            </TouchableOpacity>
-          </View>
 
           <Image
             style={styles.logo}
