@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
     },
     reload: {
       position: 'absolute',
-      top: 80,
-      left: 30,
+      top: 75,
+      left: 35,
     },
     scrowView:{
       width: '100%',
@@ -62,8 +62,21 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-start',
       width: 350,
       marginBottom: 2
-      
     },
+    textUser: {
+      fontSize: 20,
+      color: "#aa8761",
+      fontWeight: 'bold',
+      alignSelf: 'flex-start',
+      marginTop: 55,
+      marginLeft: 40,
+    },
+    textUser2: {
+      fontSize: 20,
+      color: "#aa8761",
+      marginTop: 55,
+      marginLeft: 5,
+    }
   });
 //style = { styles.scrowView }
   export default styles;
