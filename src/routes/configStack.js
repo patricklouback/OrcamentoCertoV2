@@ -3,7 +3,7 @@ import { useRoute } from '@react-navigation/native';
 
 const { Screen, Navigator } = createNativeStackNavigator();
 
-import Camera from "../screens/camera";
+import TelaCamera from "../screens/camera";
 import Configuracao from "../screens/configuracao";
 
 export function ConfigStack(){
@@ -20,7 +20,7 @@ export function ConfigStack(){
             />
             <Screen
                 name = 'camera'
-                component={Camera}
+                component={TelaCamera}
             />
         </Navigator>
     )

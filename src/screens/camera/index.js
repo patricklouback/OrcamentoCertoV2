@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { Text, View, TouchableOpacity, Modal, Image, SafeAreaView } from 'react-native';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import styles from './styles';
 
 import { Camera, CameraType } from 'expo-camera';
 
-export function Camera({ navigation }) {
+export default function TelaCamera({ navigation }) {
 
     const camRef = useRef(null);
 
@@ -59,7 +60,6 @@ export function Camera({ navigation }) {
                 </View>
 
             </View>
-
             <TouchableOpacity
                 style={styles.button}
                 onPress={takePicture}>

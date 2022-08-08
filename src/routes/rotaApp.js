@@ -24,7 +24,7 @@ export function RotaApp() {
                 iconName = "attach-money";
               } else if (route.name === 'Meus Produtos') {
                 iconName = "view-list";
-              } else if (route.name === 'Configuração') {
+              } else if (route.name === 'Perfil') {
                 iconName = "settings";
               }
   
@@ -38,7 +38,7 @@ export function RotaApp() {
         >
             <Tab.Screen name="Orçamento" component={Home} initialParams={{ uid: uid }} />
             <Tab.Screen name="Meus Produtos" component={Produtos} initialParams={{ uid: uid }} />
-            <Tab.Screen name="Configuração" component={ConfigStack} initialParams={{ uid: uid }} />
+            <Tab.Screen name="Perfil" component={ConfigStack} initialParams={{ uid: uid }} />
         </Tab.Navigator>
     )
 }
