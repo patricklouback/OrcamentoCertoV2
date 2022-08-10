@@ -10,6 +10,7 @@ import {
     Modal,
     Pressable
 } from 'react-native';
+
 import { useRoute } from '@react-navigation/native';
 
 import { getAuth, updateProfile } from "firebase/auth";
@@ -36,16 +37,14 @@ export default function Configuracao({ navigation }) {
         const auth = getAuth();
 
         updateProfile(auth.currentUser, {
-            displayName: "Patrick Louback", photoURL: "https://icons.iconarchive.com/icons/custom-icon-design/silky-line-user/256/users-icon.png"
+            displayName: nome
         }).then(() => {
-            // Profile updated!
-            // ...
+            console.log('Deu Certo!')
         }).catch((error) => {
-            // An error occurred
-            // ...
+            console.log('Deu Errado!')
         });
     }
-    
+
     const LerUser = async () => {
         const auth = getAuth();
         const user = auth.currentUser;
@@ -60,8 +59,8 @@ export default function Configuracao({ navigation }) {
 
     }
 
-    function abreCamera(){
-        navigation.navigate('camera')
+    function abreCamera() {
+        navigation.navigate('rotaCamera', { uid: uid })
     }
 
     return (
@@ -69,7 +68,7 @@ export default function Configuracao({ navigation }) {
 
             <View style={styles.container}>
                 <View style={styles.viewLogo}>
-                    <TouchableOpacity style={styles.reload} onPress={()=>{setModalVisible(!modalVisible)}}>
+                    <TouchableOpacity style={styles.reload} onPress={() => { setModalVisible(!modalVisible) }}>
                         <AntDesign
                             name='edit'
                             size={35}
@@ -81,11 +80,14 @@ export default function Configuracao({ navigation }) {
                         source={require('../../images/logo.png')}
                     />
                 </View>
-
+                <TouchableOpacity onPress={LerUser}>
                 <Image
-                    style={{ width: 200, height: 200 }}
+                    style={styles.avatar}
                     source={avatar == null ? require('../../images/user-image.png') : { uri: avatar }}
                 />
+                </TouchableOpacity>
+                <Text style={{fontSize: 10, color: '#BF996F', marginTop: 5}}>Clique na imagem para atuaizar</Text>
+
 
                 <View style={{ flexDirection: 'row', alignSelf: 'flex-start', }}>
                     <Text style={styles.textUser}>Nome: </Text>
@@ -97,31 +99,31 @@ export default function Configuracao({ navigation }) {
                 </View>
 
                 <Modal
-          animationType="fade"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
-          }}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Digite seu Nome: </Text>
-                  <TextInput
-                    style={styles.textInputNomeModal}
-                    placeholder='digite seu nome...'
-                    underlineColorAndroid='transparent'
-                    onChangeText={(props)=>{setNome(props)}}
-                    value={nome}
-              />
-              
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={SalvarUser}>
-                <Text style={styles.textStyle}>Salvar</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Modal>
+                    animationType="fade"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        setModalVisible(!modalVisible);
+                    }}>
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={styles.modalText}>Digite seu Nome: </Text>
+                            <TextInput
+                                style={styles.textInputNomeModal}
+                                placeholder='digite seu nome...'
+                                underlineColorAndroid='transparent'
+                                onChangeText={(props) => { setNome(props) }}
+                                value={nome}
+                            />
+
+                            <Pressable
+                                style={[styles.button, styles.buttonClose]}
+                                onPress={SalvarUser}>
+                                <Text style={styles.textStyle}>Salvar</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>
 
                 <TouchableOpacity style={styles.btnTirarFoto} onPress={abreCamera}>
                     <Text style={styles.btnText}>Tirar Foto</Text>

@@ -4,23 +4,19 @@ import { useRoute } from '@react-navigation/native';
 const { Screen, Navigator } = createNativeStackNavigator();
 
 import TelaCamera from "../screens/camera";
-import Configuracao from "../screens/configuracao";
 
-export function ConfigStack(){
+export function RotaCamera(){
     const route = useRoute();
     const { uid } = route.params;
+    
     return (
         <Navigator screenOptions={{
             headerShown: false,
         }}>
             <Screen
-                name = 'Configuração'
-                component={Configuracao}
-                initialParams={{ uid: uid }}
-            />
-            <Screen
                 name = 'camera'
                 component={TelaCamera}
+                initialParams={{ uid: uid }}
             />
         </Navigator>
     )

@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       borderRadius: 10,
       backgroundColor: '#BF996F',
-      marginTop: '30%'
+      marginTop: '18%'
     },
     btnSelecionarFoto: {
       width: '80%',
@@ -52,13 +52,13 @@ const styles = StyleSheet.create({
       color: "#aa8761",
       fontWeight: 'bold',
       alignSelf: 'flex-start',
-      marginTop: 55,
+      marginTop: 48,
       marginLeft: 40,
     },
     textUser2: {
       fontSize: 20,
       color: "#aa8761",
-      marginTop: 55,
+      marginTop: 48,
       marginLeft: 5,
     },
     centeredView: {
@@ -157,6 +157,11 @@ const styles = StyleSheet.create({
       color: '#BF996F',
       marginTop: 5,
     },
+    avatar: {
+       width: 200, 
+       height: 200,
+       borderRadius: 120,
+    }
   });
 //style = { styles.scrowView }
   export default styles;

@@ -5,6 +5,7 @@ const { Screen, Navigator } = createNativeStackNavigator();
 
 import { RotaApp } from "./rotaApp";
 import { RotaCadastro } from "./rotaCadastro";
+import { RotaCamera } from "./rotaCamera";
 
 export function RouteNavigation(){
     return (
@@ -18,6 +19,10 @@ export function RouteNavigation(){
             <Screen
                 name = 'rotaApp'
                 component={RotaApp}
+            />
+            <Screen
+                name = 'rotaCamera'
+                component={RotaCamera}
             />
         </Navigator>
     )

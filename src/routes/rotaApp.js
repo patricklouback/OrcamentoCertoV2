@@ -8,11 +8,10 @@ const Tab = createBottomTabNavigator();
 import Home from "../screens/home";
 import Produtos from "../screens/produtos";
 import Configuracao from '../screens/configuracao';
-import { ConfigStack } from './configStack';
 
 export function RotaApp() {
     const route = useRoute();
-    const { uid } = route.params;
+    const { uid, capturedPhoto } = route.params;
 
     return (
 
@@ -38,7 +37,7 @@ export function RotaApp() {
         >
             <Tab.Screen name="Orçamento" component={Home} initialParams={{ uid: uid }} />
             <Tab.Screen name="Meus Produtos" component={Produtos} initialParams={{ uid: uid }} />
-            <Tab.Screen name="Perfil" component={ConfigStack} initialParams={{ uid: uid }} />
+            <Tab.Screen name="Perfil" component={Configuracao} initialParams={{ uid: uid }} />
         </Tab.Navigator>
     )
 }

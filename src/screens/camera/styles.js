@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
       top: '7%',
       paddingLeft: '7%',
       paddingRight: '7%',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
     },
     button: {
       width: 80,
@@ -46,28 +46,28 @@ const styles = StyleSheet.create({
       height: 66,
       borderTopWidth: 2,
       borderLeftWidth: 2,
-      borderColor: '#F71B64',
+      borderColor: '#BF996F',
     },
     documentTopRight:{
       width: 52,
       height: 66,
       borderTopWidth: 2,
       borderRightWidth: 2,
-      borderColor: '#F71B64',
+      borderColor: '#BF996F',
     },
     documentBottomLeft:{
       width: 52,
       height: 66,
       borderLeftWidth: 2,
       borderBottomWidth: 2,
-      borderColor: '#F71B64',
+      borderColor: '#BF996F',
     },
     documentBottomRight:{
       width: 52,
       height: 66,
       borderRightWidth: 2,
       borderBottomWidth: 2,
-      borderColor: '#F71B64',
+      borderColor: '#BF996F',
     },
   });
 

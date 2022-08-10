@@ -1,11 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 import { Text, View, TouchableOpacity, Modal, Image, SafeAreaView } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles';
+
+import { getAuth, updateProfile } from "firebase/auth";
 
 import { Camera, CameraType } from 'expo-camera';
 
 export default function TelaCamera({ navigation }) {
+
+    const route = useRoute();
+    const { uid } = route.params;
 
     const camRef = useRef(null);
 
@@ -38,14 +44,32 @@ export default function TelaCamera({ navigation }) {
         }
     }
 
+    function abreTelaHome() {
+        setOpen(false)
+        navigation.navigate('rotaApp', { uid: uid });
+    }
+
+    const SalvarUser = async () => {
+        const auth = getAuth();
+
+        updateProfile(auth.currentUser, {
+            photoURL: capturedPhoto
+        }).then(() => {
+            console.log('Deu Certo!')
+            abreTelaHome();
+        }).catch((error) => {
+            console.log('Deu Errado!')
+        });
+    }
+
     return (
         <SafeAreaView style={styles.container}>
-            <Camera style={styles.camera} type={type} ref={camRef} pictureSize={'350x531'}>
+            <Camera style={styles.camera} type={type} ref={camRef} >
             </Camera>
-
             <View style={styles.buttonsView}>
-                <MaterialCommunityIcons name='lightning-bolt-circle' size={50} color='#1E1E1E' />
+                <TouchableOpacity onPress={abreTelaHome}>
                 <MaterialCommunityIcons name='close-circle' size={50} color='#1E1E1E' />
+                </TouchableOpacity>
             </View>
 
             <View style={styles.documentView}>
@@ -71,9 +95,14 @@ export default function TelaCamera({ navigation }) {
                     visible={open}
                 >
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: 20 }}>
-                        <TouchableOpacity style={{ margin: 10 }} onPress={() => { setOpen(false) }}>
-                            <MaterialIcons name='close' size={50} color='#F71B64' />
-                        </TouchableOpacity>
+                        <View style={{flexDirection: 'row', width: '80%', justifyContent: 'space-between'}}>
+                            <TouchableOpacity style={{ margin: 10 }} onPress={SalvarUser}>
+                                <MaterialIcons name='save-alt' size={50} color='black' />
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{ margin: 10 }} onPress={() => { setOpen(false) }}>
+                                <MaterialIcons name='close' size={50} color='red' />
+                            </TouchableOpacity>
+                        </View>
                         <Image
                             style={{ width: 350, height: 531, borderRadius: 20 }}
                             source={{ uri: capturedPhoto }}
@@ -82,6 +111,7 @@ export default function TelaCamera({ navigation }) {
 
                 </Modal>
             }
+
         </SafeAreaView>
     );
 }
