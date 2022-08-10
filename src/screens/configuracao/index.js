@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 
 import { useRoute } from '@react-navigation/native';
+import * as ImagePicker from 'expo-image-picker';
 
 import { getAuth, updateProfile } from "firebase/auth";
 
@@ -30,14 +31,33 @@ export default function Configuracao({ navigation }) {
 
     useEffect(() => {
         LerUser();
-    }, [])
+    })
+
+    useEffect(()=>{
+        SalvarUser();
+    },[avatar])
+
+    let openImagePickerAsync = async () => {
+        let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+        if (permissionResult.granted === false) {
+            alert("Permission to access camera roll is required!");
+            return;
+        }
+
+        let pickerResult = await ImagePicker.launchImageLibraryAsync();
+        console.log(pickerResult);
+        console.log(pickerResult.uri);
+        setAvatar(pickerResult.uri);
+    }
 
     const SalvarUser = async () => {
-        setModalVisible(!modalVisible);
+        setModalVisible(false);
         const auth = getAuth();
 
         updateProfile(auth.currentUser, {
-            displayName: nome
+            displayName: nome,
+            photoURL: avatar
         }).then(() => {
             console.log('Deu Certo!')
         }).catch((error) => {
@@ -129,7 +149,7 @@ export default function Configuracao({ navigation }) {
                     <Text style={styles.btnText}>Tirar Foto</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.btnSelecionarFoto}>
+                <TouchableOpacity style={styles.btnSelecionarFoto} onPress={openImagePickerAsync}>
                     <Text style={styles.btnText}>Selecionar Foto</Text>
                 </TouchableOpacity>
 

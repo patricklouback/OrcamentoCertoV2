@@ -9,7 +9,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback
 } from 'react-native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../../firebase';
 
@@ -18,6 +18,7 @@ import styles from './styles';
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { async } from '@firebase/util';
 
 const schema = yup.object({
   email: yup.string().required('Informe seu email'),
@@ -29,10 +30,48 @@ export default function Login({ navigation }) {
   const [uid, setUid] = useState('');
   const [verificado, setVerificado] = useState(false);
   const [loadingVisible, setLoadingVisible] = useState(false);
+  const [EMAIL, setEMAIL] = useState(null);
+  const [SENHA, setSENHA] = useState(null);
 
   const { control, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema)
   })
+
+  useEffect(()=>{
+    AsyncStorage.getItem('email').then((email)=>{
+      console.log('email: ' + email)
+      setEMAIL(email);
+    })
+    AsyncStorage.getItem('senha').then((senha)=>{
+      console.log('senha: ' + senha)
+      setSENHA(senha);
+    })
+
+  })
+
+  useEffect(()=>{
+    if(EMAIL != null && SENHA != null) {
+      firstLogin();
+    } 
+    
+    
+    async function firstLogin() {
+      setLoadingVisible(true);
+      signInWithEmailAndPassword(auth, EMAIL, SENHA)
+        .then((userCredential) => {
+          // Signed in
+          const uid = userCredential.user.uid;
+          const emailVerificado = userCredential.user.emailVerified;
+          setUid(uid);
+          setVerificado(emailVerificado);
+        })
+        .catch((error) => {
+          const errorMessage = error.message;
+          setLoadingVisible(false);
+          alert(errorMessage)
+        });
+      }
+  },[EMAIL, SENHA])
 
   useEffect(() => {
     if (uid == '') {
@@ -54,6 +93,8 @@ export default function Login({ navigation }) {
         const emailVerificado = userCredential.user.emailVerified;
         setUid(uid);
         setVerificado(emailVerificado);
+        AsyncStorage.setItem("email", data.email.trim())
+        AsyncStorage.setItem("senha", data.senha)
       })
       .catch((error) => {
         const errorMessage = error.message;
