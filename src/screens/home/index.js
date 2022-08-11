@@ -38,7 +38,7 @@ export default function Home({ navigation }) {
 
   const calcularValorFinal = (data) => {
     const itensString = [data.item1, data.item2, data.item3, data.item4, data.item5, data.item6,
-    data.item7, data.item8, data.item9, data.item10, data.item11, data.item12, data.item13, data.item14];
+    data.item7, data.item8, data.item9, data.item10, data.item11, data.item12];
     var soma = 0
     for (let index = 0; index < itensString.length; index++) {
       if (itensString[index] == undefined || itensString[index] == '') {
@@ -116,13 +116,13 @@ export default function Home({ navigation }) {
       <View style={styles.container}>
 
         <View style={styles.viewLogo}>
-            <TouchableOpacity style={styles.save} onPress={() => { setModalVisible(true) }}>
-              <Entypo
-                name='save'
-                size={35}
-                color='#BF996F'
-              />
-            </TouchableOpacity>
+          <TouchableOpacity style={styles.save} onPress={() => { setModalVisible(true) }}>
+            <Entypo
+              name='save'
+              size={35}
+              color='#BF996F'
+            />
+          </TouchableOpacity>
 
           <Image
             style={styles.logo}
@@ -131,6 +131,8 @@ export default function Home({ navigation }) {
         </View>
 
         <View style={styles.viewForm}>
+          <Text style={[styles.cliqueAquiText, { fontSize: 22, marginBottom: '3%', marginTop: '-2%' }]}>Insira os valores dos itens</Text>
+
           <View style={styles.viewInput}>
             <Controller
               control={control}
@@ -138,7 +140,7 @@ export default function Home({ navigation }) {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.textInput}
-                  placeholder='Item 1'
+                  placeholder='Ex: 1.50'
                   underlineColorAndroid='transparent'
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -155,7 +157,7 @@ export default function Home({ navigation }) {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.textInput}
-                  placeholder='Item 2'
+                  placeholder='Ex: 1.50'
                   underlineColorAndroid='transparent'
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -173,7 +175,7 @@ export default function Home({ navigation }) {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.textInput}
-                  placeholder='Item 3'
+                  placeholder='.'
                   underlineColorAndroid='transparent'
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -190,7 +192,7 @@ export default function Home({ navigation }) {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.textInput}
-                  placeholder='Item 4'
+                  placeholder='.'
                   underlineColorAndroid='transparent'
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -208,7 +210,7 @@ export default function Home({ navigation }) {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.textInput}
-                  placeholder='Item 5'
+                  placeholder='.'
                   underlineColorAndroid='transparent'
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -225,7 +227,7 @@ export default function Home({ navigation }) {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.textInput}
-                  placeholder='Item 6'
+                  placeholder='.'
                   underlineColorAndroid='transparent'
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -243,7 +245,7 @@ export default function Home({ navigation }) {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.textInput}
-                  placeholder='Item 7'
+                  placeholder='.'
                   underlineColorAndroid='transparent'
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -260,7 +262,7 @@ export default function Home({ navigation }) {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.textInput}
-                  placeholder='Item 8'
+                  placeholder='.'
                   underlineColorAndroid='transparent'
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -278,7 +280,7 @@ export default function Home({ navigation }) {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.textInput}
-                  placeholder='Item 9'
+                  placeholder='.'
                   underlineColorAndroid='transparent'
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -295,7 +297,7 @@ export default function Home({ navigation }) {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.textInput}
-                  placeholder='Item 10'
+                  placeholder='.'
                   underlineColorAndroid='transparent'
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -313,7 +315,7 @@ export default function Home({ navigation }) {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.textInput}
-                  placeholder='Item 11'
+                  placeholder='.'
                   underlineColorAndroid='transparent'
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -330,42 +332,7 @@ export default function Home({ navigation }) {
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.textInput}
-                  placeholder='Item 12'
-                  underlineColorAndroid='transparent'
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  autoCapitalize='none'
-                  keyboardType='numeric'
-                />
-              )}
-            />
-          </View>
-          <View style={styles.viewInput}>
-            <Controller
-              control={control}
-              name='item13'
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  style={styles.textInput}
-                  placeholder='Item 13'
-                  underlineColorAndroid='transparent'
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  autoCapitalize='none'
-                  keyboardType='numeric'
-                />
-              )}
-            />
-
-            <Controller
-              control={control}
-              name='item14'
-              render={({ field: { onChange, onBlur, value } }) => (
-                <TextInput
-                  style={styles.textInput}
-                  placeholder='Item 14'
+                  placeholder='.'
                   underlineColorAndroid='transparent'
                   onChangeText={onChange}
                   onBlur={onBlur}
@@ -389,6 +356,9 @@ export default function Home({ navigation }) {
           }}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
+              <TouchableOpacity style={styles.closeModal} onPress={() => { setModalVisible(false) }}>
+                <AntDesign name="close" size={26} color="#BF996F" />
+              </TouchableOpacity>
               <Text style={styles.modalText}>Nome do Produto: </Text>
               <Controller
                 control={control}
@@ -421,7 +391,7 @@ export default function Home({ navigation }) {
                 )}
               />
               <Pressable
-                style={[styles.button, styles.buttonClose]}
+                style={styles.button}
                 onPress={handleSubmit(saveNomeDescricao)}>
                 <Text style={styles.textStyle}>Salvar</Text>
               </Pressable>
@@ -438,6 +408,9 @@ export default function Home({ navigation }) {
           }}>
           <View style={styles.centeredView}>
             <View style={styles.modalMargemView}>
+              <TouchableOpacity style={styles.closeModal} onPress={() => { setModal2Visible(false) }}>
+                <AntDesign name="close" size={26} color="#BF996F" />
+              </TouchableOpacity>
               <Text style={styles.modalText}>Nova Margem (Padrão 2.4x): </Text>
               <Controller
                 control={control}
@@ -445,7 +418,7 @@ export default function Home({ navigation }) {
                 render={({ field: { onChange, onBlur, value } }) => (
                   <TextInput
                     style={styles.textInputMargemModal}
-                    placeholder='Nova Margem do Produto'
+                    placeholder='Ex: 2.8'
                     underlineColorAndroid='transparent'
                     onChangeText={onChange}
                     onBlur={onBlur}
@@ -456,9 +429,9 @@ export default function Home({ navigation }) {
               />
 
               <Pressable
-                style={[styles.button, styles.buttonClose]}
+                style={styles.button}
                 onPress={handleSubmit(saveMargem)}>
-                <Text style={styles.textStyle}>Salvar</Text>
+                <Text style={styles.textStyle}>OK</Text>
               </Pressable>
             </View>
           </View>

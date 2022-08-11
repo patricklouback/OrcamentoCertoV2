@@ -40,9 +40,10 @@ export default function Cadastro({ navigation }) {
   }
 
   const handleNewAccount = data => {
-    createUserWithEmailAndPassword(auth, data.email, data.senha)
+    createUserWithEmailAndPassword(auth, data.email.trim(), data.senha)
       .then((userCredential) => {
         const user = userCredential.user;
+        alert('Verifique seu E-mail');
         abreTelalogin();
         sendEmailVerification(user);
       })

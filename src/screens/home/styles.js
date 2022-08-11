@@ -1,207 +1,199 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+  },
+  viewLogo: {
+    width: '100%',
+    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    marginTop: '5%'
+  },
+  viewIcons: {
+    width: 100,
+    height: 200,
+  },
+  save: {
+    position: 'absolute',
+    top: '40%',
+    left: '13%',
+  },
+  logo: {
+    width: 250,
+    height: 150,
+  },
+  viewForm: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  viewInput: {
+    flexDirection: 'row',
+    width: '55%',
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: '2%',
+  },
+  textInput: {
+    width: '42%',
+    height: 45,
+    fontSize: 15,
+    color: '#BF996F',
+    backgroundColor: '#f9f3ed',
+    borderColor: '#BF996F',
+    borderWidth: 1,
+    borderRadius: 10,
+    textAlign: 'center'
+  },
+  Btn: {
+    width: '57%',
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#BF996F',
+    borderBottomRightRadius: 6,
+    borderTopLeftRadius: 6,
+    marginTop: '15%',
+    elevation: 2
+  },
+  BtnText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#FFF',
+  },
+  viewAlteraMargem: {
+    width: '84%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: '8%',
+  },
+  querAlterarText: {
+    color: '#BF996F'
+  },
+  cliqueAquiText: {
+    color: '#BF996F',
+    fontWeight: 'bold',
+  },
+  viewResultado: {
+    flexDirection: 'row',
+    width: '85%',
+    height: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f9f3ed',
+    borderColor: '#BF996F',
+    borderWidth: 1,
+    borderRadius: 20,
+    marginTop: '2%',
+  },
+  textoValorFinal: {
+    fontSize: 20,
+    color: '#BF996F',
+    fontWeight: 'bold',
+  },
+  textoResultado: {
+    fontSize: 20,
+    color: '#BF996F',
+    fontWeight: 'bold',
+    marginLeft: '1.5%'
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalView: {
+    width: '90%',
+    height: 300,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
     },
-    viewLogo: {
-        width: '100%',
-        justifyContent:'flex-end',
-        flexDirection:'row',
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    padding: '7%',
+  },
+  closeModal: {
+    position: 'absolute',
+    top: '8%',
+    right: '6%'
+  },
+  button: {
+    width: '25%',
+    backgroundColor: '#BF996F',
+    borderRadius: 4,
+    padding: '4%',
+    elevation: 3,
+    alignSelf: 'flex-end',
+    marginRight: '2%',
+    marginTop: '8%'
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#BF996F',
+    marginBottom: '1%'
+  },
+  textInputNomeModal: {
+    width: '70%',
+    height: 40,
+    fontSize: 14,
+    color: '#BF996F',
+    borderColor: '#BF996F',
+    borderWidth: 0.5,
+    borderRadius: 8,
+    padding: '2%',
+    marginBottom: '3%',
+  },
+  textInputDescricaoModal: {
+    width: '98%',
+    height: 80,
+    fontSize: 14,
+    color: '#BF996F',
+    borderColor: '#BF996F',
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingLeft: '2%',
+  },
+  modalMargemView: {
+    width: '90%',
+    height: 200,
+    backgroundColor: '#f9f3ed',
+    borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
     },
-    viewIcons:{
-      width: 100,
-      height: 200,
-    },
-    save: {
-      position: 'absolute',
-      top: 80,
-      left: 30,
-    },
-    produtos: {
-      position: 'absolute',
-      top: 120,
-      left: 30,
-    },
-    logo: {
-        width: 300,
-        height: 200,
-    },
-    viewForm: {
-        width: '100%',
-        marginTop: -35
-    },
-    viewInput:{
-      flexDirection: 'row',
-      width: '100%',
-      height: 45,
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginTop: 10
-    },
-    textInput: {
-      width: 150,
-      height: 45,
-      borderWidth:1,
-      borderColor: '#BF996F',
-      borderRadius: 10,
-      padding: 10,
-      fontSize: 15,
-      color: '#BF996F',
-      marginLeft: 10
-    },
-    Btn: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#BF996F',
-      borderRadius: 15,
-      width: 350,
-      height: 55,
-      marginTop: 25
-    },
-    BtnText: {
-      fontSize: 20,
-      fontWeight: 'bold',
-      color: '#FFF'
-    },
-    labelError: {
-      fontSize: 13,
-      color: '#BF996F',
-      width:'100%',
-      marginLeft: 140,
-    },
-    viewAlteraMargem: {
-      width: '100%',
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
-      marginTop: 20,
-      marginRight: 70,
-    },
-    querAlterarText: {
-        color: '#BF996F'
-    },
-    cliqueAquiText: {
-        color: '#BF996F',
-        fontWeight: 'bold',
-    },
-    viewResultado: {
-      width: 350,
-      height: 100,
-      marginTop: 20,
-      borderRadius: 20,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#f9f3ed',
-      borderWidth:2,
-      borderColor: '#BF996F',
-      flexDirection: 'row',
-    },
-    textoValorFinal: {
-      fontSize: 20,
-      color: '#BF996F',
-      fontWeight: 'bold',
-    },
-    textoResultado: {
-      fontSize: 20,
-      color: '#BF996F',
-      fontWeight: 'bold',
-      marginLeft: 5
-    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    padding: '7%',
+  },
+  textInputMargemModal: {
+    width: '25%',
+    height: 40,
+    fontSize: 15,
+    color: '#BF996F',
+    backgroundColor: 'white',
+    borderColor: '#BF996F',
+    borderWidth: 0.5,
+    borderRadius: 5,
+    padding: '2%',
+    marginTop: '4%'
+  },
+});
 
-    centeredView: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: 22,
-    },
-    modalView: {
-      width: 350,
-      height: 270,
-      margin: 20,
-      backgroundColor: 'white',
-      borderRadius: 20,
-      padding: 35,
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5,
-    },
-    button: {
-      width: 100,
-      borderRadius: 10,
-      padding: 10,
-      marginTop: 10,
-      elevation: 3
-    },
-    buttonClose: {
-      backgroundColor: '#BF996F',
-    },
-    textStyle: {
-      color: 'white',
-      fontWeight: 'bold',
-      textAlign: 'center',
-    },
-    modalText: {
-      marginLeft: 2,
-      fontSize: 15,
-      color: '#BF996F',
-      fontWeight: 'bold'
-    },
-    textInputNomeModal: {
-      width: 300,
-      height: 40,
-      borderWidth:1,
-      borderColor: '#BF996F',
-      borderRadius: 10,
-      padding: 10,
-      fontSize: 15,
-      color: '#BF996F',
-      marginTop: 5,
-    },
-    textInputDescricaoModal: {
-      width: 300,
-      height: 80,
-      borderWidth:1,
-      borderColor: '#BF996F',
-      borderRadius: 10,
-      paddingLeft: 10,
-      fontSize: 15,
-      color: '#BF996F',
-      marginTop: 5,
-    },
-    modalMargemView: {
-      width: 250,
-      height: 170,
-      margin: 20,
-      backgroundColor: 'white',
-      borderRadius: 20,
-      padding: 35,
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5,
-    },
-    textInputMargemModal: {
-      width: 180,
-      height: 40,
-      borderWidth:1,
-      borderColor: '#BF996F',
-      borderRadius: 10,
-      padding: 10,
-      fontSize: 15,
-      color: '#BF996F',
-      marginTop: 5,
-    },
-  });
-
-  export default styles;
+export default styles;
