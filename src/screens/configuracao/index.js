@@ -31,7 +31,7 @@ export default function Configuracao({ navigation }) {
 
     useEffect(() => {
         LerUser();
-    })
+    },[])
 
     useEffect(()=>{
         SalvarUser();

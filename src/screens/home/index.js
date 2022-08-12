@@ -53,6 +53,8 @@ export default function Home({ navigation }) {
   }
 
   const saveProduct = () => {
+    
+    setModalVisible(false);
 
     const firestore = getFirestore();
     var UID = uid.trim();
@@ -76,8 +78,11 @@ export default function Home({ navigation }) {
 
   const saveNomeDescricao = data => {
     setNome(data.nomeDoProduto);
-    setDescricao(data.descricaoDoProduto);
-    setModalVisible(!modalVisible);
+    if (data.descricaoDoProduto == undefined) {
+      setDescricao('');
+    } else {
+      setDescricao(data.descricaoDoProduto);
+    }
   }
 
   const saveMargem = data => {
@@ -99,8 +104,8 @@ export default function Home({ navigation }) {
   }, [])
 
   useEffect(() => {
-    if (nome == '' || descricao == '') {
-      return
+    if (nome == '' || nome == undefined) {
+      return 
     } else {
       saveProduct();
     }

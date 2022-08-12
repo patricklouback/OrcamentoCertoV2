@@ -49,7 +49,7 @@ export default function Login({ navigation }) {
 
   })
 
-/*   useEffect(()=>{
+   useEffect(()=>{
     if(EMAIL != null && SENHA != null) {
       firstLogin();
     }
@@ -71,7 +71,7 @@ export default function Login({ navigation }) {
           alert(errorMessage)
         });
       }
-  },[EMAIL, SENHA]) */
+  },[EMAIL, SENHA]) 
 
   useEffect(() => {
     if (uid == '') {
