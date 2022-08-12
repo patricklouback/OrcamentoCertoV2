@@ -213,8 +213,6 @@ export default function Produtos({ navigation }) {
                     }
                 />
 
-
-
                 <Modal
                     animationType="fade"
                     transparent={true}
