@@ -18,7 +18,7 @@ import styles from './styles';
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { async } from '@firebase/util';
+import { Feather } from "@expo/vector-icons";
 
 const schema = yup.object({
   email: yup.string().required('Informe seu email'),
@@ -32,6 +32,9 @@ export default function Login({ navigation }) {
   const [loadingVisible, setLoadingVisible] = useState(false);
   const [EMAIL, setEMAIL] = useState(null);
   const [SENHA, setSENHA] = useState(null);
+  const [focusEmail, setFocusEmail] = useState(false)
+  const [focusSenha, setFocusSenha] = useState(false)
+  const [mostrarSenha, setMostrarSenha] = useState(false)
 
   const { control, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema)
@@ -49,7 +52,7 @@ export default function Login({ navigation }) {
 
   })
 
-   useEffect(()=>{
+    useEffect(()=>{
     if(EMAIL != null && SENHA != null) {
       firstLogin();
     }
@@ -71,7 +74,7 @@ export default function Login({ navigation }) {
           alert(errorMessage)
         });
       }
-  },[EMAIL, SENHA]) 
+  },[EMAIL, SENHA])  
 
   useEffect(() => {
     if (uid == '') {
@@ -132,7 +135,7 @@ export default function Login({ navigation }) {
           source={require('../../images/logo.png')}
         />
 
-        <View style={styles.viewInput}>
+        <View style={[styles.viewInput, {borderColor: focusEmail ? "#BF996F" : "#DCDCDC"}]}>
           <Image
             style={styles.icon}
             source={require('../../images/email.png')}
@@ -144,12 +147,14 @@ export default function Login({ navigation }) {
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 style={styles.textInput}
-                placeholder='Email'
+                placeholder='username@email.com'
                 underlineColorAndroid='transparent'
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
                 autoCapitalize='none'
+                onFocus={()=>{setFocusEmail(true)}}
+                onEndEditing={()=>{setFocusEmail(false)}}
               />
             )}
           />
@@ -157,7 +162,7 @@ export default function Login({ navigation }) {
         {errors.email && <Text style={styles.labelError}>{errors.email?.message}</Text>}
 
 
-        <View style={styles.viewInput}>
+        <View style={[styles.viewInput, {borderColor: focusSenha ? "#BF996F" : "#DCDCDC"}]}>
           <Image
             style={styles.icon}
             source={require('../../images/senha.png')}
@@ -168,16 +173,26 @@ export default function Login({ navigation }) {
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 style={styles.textInput}
-                placeholder='Senha'
+                placeholder="*********"
                 underlineColorAndroid='transparent'
                 onChangeText={onChange}
                 onBlur={onBlur}
                 value={value}
                 autoCapitalize='none'
-                secureTextEntry={true}
+                secureTextEntry={!mostrarSenha}
+                onFocus={()=>{setFocusSenha(true)}}
+                onEndEditing={()=>{setFocusSenha(false)}}
               />
             )}
           />
+          <TouchableOpacity onPress={()=>{setMostrarSenha(!mostrarSenha)}}>
+          <Feather 
+          name= {mostrarSenha ? "eye-off" : "eye"} 
+          size={23}
+          color={"#BF996F"}
+          style={{alignSelf: 'center'}}
+          />
+          </TouchableOpacity>
         </View>
         {errors.senha && <Text style={styles.labelError}>{errors.senha?.message}</Text>}
 

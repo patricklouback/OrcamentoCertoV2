@@ -12,26 +12,25 @@ const styles = StyleSheet.create({
   },
   viewInput: {
     flexDirection: 'row',
-    width: '100%',
-    height: 60,
+    width: '85%',
+    height: 50,
     alignItems: 'center',
     marginTop: '2%',
+    borderWidth: 1,
+    borderRadius: 12,
   },
   icon: {
     height: 25,
     width: 25,
-    marginLeft: '7%'
+    marginLeft: '3%'
   },
   textInput: {
     width: '78%',
     height: 45,
     marginLeft: '2%',
-    borderWidth: 1,
-    borderColor: '#BF996F',
-    borderRadius: 10,
     padding: '2%',
     fontSize: 15,
-    color: '#BF996F'
+    color: '#BF996F',
   },
   viewEsqueci: {
     width: '100%',
