@@ -1,80 +1,62 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Orçamento Certo V2</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-    h1 {
-      font-size: 36px;
-      margin-bottom: 1.2rem;
-      color: #009688;
-    }
-    h2 {
-      font-size: 24px;
-      margin-bottom: 1rem;
-      color: #009688;
-    }
-    ul {
-      margin-left: 2rem;
-      margin-bottom: 1.2rem;
-    }
-    li {
-      margin-bottom: 0.4rem;
-    }
-    code {
-      background-color: #f7f7f7;
-      border-radius: 3px;
-      font-size: 14px;
-      padding: 0.2rem 0.4rem;
-    }
-    .emoji {
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 0.2rem;
-      font-size: 24px;
-    }
-    .emoji-sm {
-      font-size: 16px;
-    }
-    .emoji-heart {
-      color: #e91e63;
-    }
-    .emoji-rocket {
-      color: #3f51b5;
-    }
-    .emoji-money {
-      color: #4caf50;
-    }
-    .emoji-save {
-      color: #ffc107;
-    }
-    .emoji-image {
-      color: #009688;
-    }
-  </style>
-</head>
-<body>
-  <h1><span class="emoji emoji-rocket"></span> Orçamento Certo V2</h1>
-  <p>Este é um aplicativo Versão 2 feito em React Native. A Versão 1 foi feita em Kotlin, nativo para Android.</p>
-  <p>Para esta versão, usei Expo, React Navigation, React Hook Form e integrei com o Firebase.</p>
-  <h2><span class="emoji emoji-money"></span> Funcionalidades do APP:</h2>
-  <ul>
-    <li>Tela de login, cadastro e autenticação do usuário, usando o Firebase.</li>
-    <li>Criação e precificação de produtos, com base nos custos de material e margem de lucro.</li>
-    <li>Composição de um produto com vários itens internos, sabendo o preço de cada item, precifica o produto completo.</li>
-    <li>Salvamento dos produtos criados no Firebase.</li>
-    <li>Listagem dos produtos salvos em outra tela.</li>
-    <li>Salvamento de foto do usuário no app, edição de nome, etc.</li>
-  </ul>
-  <h2><span class="emoji emoji-save"></span> Como rodar o código:</h2>
-  <ol>
-    <li>Instale o React Navigation: <a href="https://reactnavigation.org/" target="_blank">https://reactnavigation.org/</a></li>
-    <li>Instale o React Hook Form: <a href="https://react-hook-form.com/get-started#Quickstart" target="_blank">https://react-hook-form.com/get-started#Quickstart</a> e <a
+# Orçamento Certo Versão 2 💰💸📊
+
+Este é um app desenvolvido em React Native para realizar precificação de produtos a partir dos custos de materiais e margem de lucro. 
+
+## Tecnologias Utilizadas 🚀
+
+O Orçamento Certo Versão 2 utiliza as seguintes tecnologias:
+
+- React Native
+- Expo
+- React Navigation
+- React Hook Form
+- Firebase
+
+## Funcionalidades do App 📱
+
+O app possui as seguintes funcionalidades:
+
+- Tela de login, cadastro e autenticação do usuário, usando o Firebase.
+- Possibilidade de criar e precificar produtos, com base nos custos de material e margem de lucro.
+- Lista de produtos salvos em outra tela, permitindo a edição de nome e inclusão de fotos.
+
+## Como Rodar o Código 🛠️
+
+Para rodar o código do Orçamento Certo Versão 2, siga os seguintes passos:
+
+1. Instale as dependências do React Navigation: https://reactnavigation.org/
+2. Instale as dependências do React Hook Form: https://react-hook-form.com/get-started#Quickstart e https://react-hook-form.com/get-started#SchemaValidation
+3. Instale o Firebase com o seguinte comando: `yarn add firebase`
+4. Instale o AsyncStorage com o seguinte comando: `yarn add @react-native-async-storage/async-storage`
+5. Execute o comando `yarn start` para iniciar o app no Expo.
+# Orçamento Certo Versão 2 💰💸📊
+
+Este é um app desenvolvido em React Native para realizar precificação de produtos a partir dos custos de materiais e margem de lucro. 
+
+## Tecnologias Utilizadas 🚀
+
+O Orçamento Certo Versão 2 utiliza as seguintes tecnologias:
+
+- React Native
+- Expo
+- React Navigation
+- React Hook Form
+- Firebase
+
+## Funcionalidades do App 📱
+
+O app possui as seguintes funcionalidades:
+
+- Tela de login, cadastro e autenticação do usuário, usando o Firebase.
+- Possibilidade de criar e precificar produtos, com base nos custos de material e margem de lucro.
+- Lista de produtos salvos em outra tela, permitindo a edição de nome e inclusão de fotos.
+
+## Como Rodar o Código 🛠️
+
+Para rodar o código do Orçamento Certo Versão 2, siga os seguintes passos:
+
+1. Instale as dependências do React Navigation: https://reactnavigation.org/
+2. Instale as dependências do React Hook Form: https://react-hook-form.com/get-started#Quickstart e https://react-hook-form.com/get-started#SchemaValidation
+3. Instale o Firebase com o seguinte comando: `yarn add firebase`
+4. Instale o AsyncStorage com o seguinte comando: `yarn add @react-native-async-storage/async-storage`
+5. Execute o comando `yarn start` para iniciar o app no Expo.
